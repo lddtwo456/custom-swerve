@@ -3,13 +3,19 @@ package frc.lib.sensor.absolute;
 import java.util.function.Supplier;
 
 /** General interface for absolute encoders */
-public interface AbsoluteEncoder {
+public abstract class AbsoluteEncoder {
 
-  /** Initialize and configure the absolute encoder */
-  public void configure();
+  /** Offset position of the encoder in rotations */
+  private double offsetPosRotations = 0.0;
 
-  /** Set encoder position in rotations */
-  public void setPosRotations(double posRotations);
+  /** Current position of the encoder in rotations */
+  public void setOffsetPosRotations(double posRotations) {
+    this.offsetPosRotations = posRotations;
+    configure();
+  }
+
+  /** Configure the absoulte encoder (apply offsets and other configurations) */
+  public abstract void configure();
   
   // suppliers for getting readings from the encoder
 
@@ -17,20 +23,20 @@ public interface AbsoluteEncoder {
    * Returns angle supplier for absolute encoder
    * @return angle supplier for absolute encoder
    */
-  public Supplier<Double> getPosRotations();
+  public abstract Supplier<Double> getPosRotations();
 
   /**
    * Returns velocity supplier for absolute encoder
    * @return velocity supplier for absolute encoder
    */
-  public Supplier<Double> getVelRotationsPerSec();
+  public abstract Supplier<Double> getVelRotationsPerSec();
 
   /**
    * Returns acceleration supplier for absolute encoder
    * @return acceleration supplier for absolute encoder
    */
-  public Supplier<Double> getAccRotationsPerSecPerSec();
+  public abstract Supplier<Double> getAccRotationsPerSecPerSec();
 
   /** Overridable periodic function for extra functionality run every periodic loop */
-  default void peroidic() {}
+  default abstract void peroidic() {}
 }

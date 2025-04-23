@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 
 import frc.lib.CAN;
 
-public class AbsoluteEncoderCANcoder implements AbsoluteEncoder {
+public class AbsoluteEncoderCANcoder extends AbsoluteEncoder {
 
   // Encoder reference
   private final CANcoder encoder;
