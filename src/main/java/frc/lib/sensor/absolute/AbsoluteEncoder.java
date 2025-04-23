@@ -46,7 +46,7 @@ public abstract class AbsoluteEncoder {
    * @param ccwPositive ccw positive configuration
    */
   public void setCCWPositive(boolean ccwPositive) {
-    setConfig(
+    reconfigure(
       AbsoluteEncoderBuilder.edit(getConfig())
         .ccwPositive(ccwPositive)
         .build());
@@ -58,7 +58,7 @@ public abstract class AbsoluteEncoder {
    * @param sensorToMechRatio new sensor to mechanism ratio
    */
   public void setSensorToMechRatio(double sensorToMechRatio) {
-    setConfig(
+    reconfigure(
       AbsoluteEncoderBuilder.edit(getConfig())
         .sensorToMechRatio(sensorToMechRatio)
         .build());
@@ -70,7 +70,7 @@ public abstract class AbsoluteEncoder {
    * @param offset new absolute encoder offset
    */
   public void setOffsetRotation(Rotation2d offset) {
-    setConfig(
+    reconfigure(
       AbsoluteEncoderBuilder.edit(getConfig())
         .offset(offset)
         .build());
