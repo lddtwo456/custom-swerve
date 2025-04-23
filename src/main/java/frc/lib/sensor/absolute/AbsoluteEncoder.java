@@ -2,41 +2,109 @@ package frc.lib.sensor.absolute;
 
 import java.util.function.Supplier;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import frc.lib.configs.AbsoluteEncoderConfig;
+import frc.lib.configs.AbsoluteEncoderConfig.AbsoluteEncoderBuilder;
+
 /** General interface for absolute encoders */
 public abstract class AbsoluteEncoder {
 
-  /** Offset position of the encoder in rotations */
-  private double offsetPosRotations = 0.0;
+  /** Encoder config */
+  private AbsoluteEncoderConfig config = AbsoluteEncoderBuilder.defaults().build();
 
-  /** Current position of the encoder in rotations */
-  public void setOffsetPosRotations(double posRotations) {
-    this.offsetPosRotations = posRotations;
+  /**
+   * Update absolute encoder config
+   * 
+   * @param config new absolute encoder config
+   */
+  public void setConfig(AbsoluteEncoderConfig config) {
+    this.config = config;
+  }
+
+  /** 
+   * Update absolute encoder config and rerun configure() function
+   * 
+   * @param newConfig new absolute encoder config
+   */
+  public void reconfigure(AbsoluteEncoderConfig newConfig) {
+    config = newConfig;
     configure();
   }
 
-  /** Configure the absoulte encoder (apply offsets and other configurations) */
+  /**
+   * Get current absolute encoder config
+   * 
+   * @return current absolute encoder config
+   */
+  public AbsoluteEncoderConfig getConfig() {
+    return config;
+  }
+
+  /**
+   * Set ccw positive configuration and reconfigure
+   * 
+   * @param ccwPositive ccw positive configuration
+   */
+  public void setCCWPositive(boolean ccwPositive) {
+    setConfig(
+      AbsoluteEncoderBuilder.edit(getConfig())
+        .ccwPositive(ccwPositive)
+        .build());
+  }
+
+  /**
+   * Set new sensor to mechanism ratio and reconfigure
+   * 
+   * @param sensorToMechRatio new sensor to mechanism ratio
+   */
+  public void setSensorToMechRatio(double sensorToMechRatio) {
+    setConfig(
+      AbsoluteEncoderBuilder.edit(getConfig())
+        .sensorToMechRatio(sensorToMechRatio)
+        .build());
+  }
+  
+  /**
+   * Set new absolute encoder offset and reconfigure
+   * 
+   * @param offset new absolute encoder offset
+   */
+  public void setOffsetRotation(Rotation2d offset) {
+    setConfig(
+      AbsoluteEncoderBuilder.edit(getConfig())
+        .offset(offset)
+        .build());
+  }
+
+  /** Configure the absoulte encoder */
   public abstract void configure();
   
-  // suppliers for getting readings from the encoder
+  // Overridable suppliers for getting readings from the encoder
 
   /**
    * Returns angle supplier for absolute encoder
    * @return angle supplier for absolute encoder
    */
-  public abstract Supplier<Double> getPosRotations();
+  public Supplier<Double> getPosRotations() {
+    throw new UnsupportedOperationException("Position supplier not defined");
+  }
 
   /**
    * Returns velocity supplier for absolute encoder
    * @return velocity supplier for absolute encoder
    */
-  public abstract Supplier<Double> getVelRotationsPerSec();
+  public Supplier<Double> getVelRotationsPerSec() {
+    throw new UnsupportedOperationException("Velocity supplier not defined");
+  }
 
   /**
    * Returns acceleration supplier for absolute encoder
    * @return acceleration supplier for absolute encoder
    */
-  public abstract Supplier<Double> getAccRotationsPerSecPerSec();
+  public Supplier<Double> getAccRotationsPerSecPerSec() {
+    throw new UnsupportedOperationException("Acceleration supplier not defined");
+  }
 
   /** Overridable periodic function for extra functionality run every periodic loop */
-  default abstract void peroidic() {}
+  public void periodic() {}
 }
