@@ -3,6 +3,7 @@ package frc.lib.sensor.absolute;
 import java.util.function.Supplier;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.lib.configs.AbsoluteEncoderConfig;
 import frc.lib.configs.AbsoluteEncoderConfig.AbsoluteEncoderBuilder;
 
@@ -46,37 +47,39 @@ public abstract class AbsoluteEncoder {
   // Overridable suppliers for getting readings from the encoder
 
   /**
-   * Returns angle supplier for absolute encoder
-   * @return angle supplier for absolute encoder
+   * Returns angle getter for absolute encoder
+   * 
+   * @return angle getter for absolute encoder
    */
   public Supplier<Double> getPosRotations() {
-    throw new UnsupportedOperationException("Position supplier not defined");
+    DriverStation.reportWarning("Absolute encoder position supplier not defined", true);
+    return () -> 0.0;
   }
 
   /**
-   * Returns velocity supplier for absolute encoder
-   * @return velocity supplier for absolute encoder
+   * Returns velocity getter for absolute encoder
+   * 
+   * @return velocity getter for absolute encoder
    */
   public Supplier<Double> getVelRotationsPerSec() {
-    throw new UnsupportedOperationException("Velocity supplier not defined");
+    DriverStation.reportWarning("Absolute encoder velocity supplier not defined", true);
+    return () -> 0.0;
   }
 
   /**
-   * Returns acceleration supplier for absolute encoder
-   * @return acceleration supplier for absolute encoder
+   * Returns acceleration getter for absolute encoder
+   * 
+   * @return acceleration getter for absolute encoder
    */
   public Supplier<Double> getAccRotationsPerSecPerSec() {
-    throw new UnsupportedOperationException("Acceleration supplier not defined");
+    DriverStation.reportWarning("Absolute encoder acceleration supplier not defined", true);
+    return () -> 0.0;
   }
 
   /** Overridable periodic function for extra functionality run every periodic loop */
   public void periodic() {}
-
-
-
-
   
-  // Setters 
+  // Setters for temporary reonfiguration
 
   /**
    * Set ccw positive configuration and reconfigure

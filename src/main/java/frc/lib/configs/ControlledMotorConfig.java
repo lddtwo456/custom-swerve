@@ -9,7 +9,7 @@ package frc.lib.configs;
  * @param statorCurrentLimit current limit in the stator
  * @param supplyCurrentLimit supply current limit
  */
-public record PositionControllerConfig (
+public record ControlledMotorConfig (
     boolean neutralBrake,
     boolean ccwPositive,
     double motorToMechRatio,
@@ -29,7 +29,7 @@ public record PositionControllerConfig (
     double velTolerance) {
 
   /** Easier and more modular way to construct a motor config */
-  public static class PositionControllerBuilder {
+  public static class ControlledMotorBuilder {
     private boolean neutralBrake;
     private boolean ccwPositive;
     private double motorToMechRatio;
@@ -48,7 +48,7 @@ public record PositionControllerConfig (
     private double posTolerance;
     private double velTolerance;
 
-    private PositionControllerBuilder (
+    private ControlledMotorBuilder (
         boolean neutralBrake,
         boolean ccwPositive,
         double motorToMechRatio,
@@ -90,8 +90,8 @@ public record PositionControllerConfig (
      * 
      * @return a builder with default values
      */
-    public static PositionControllerBuilder defaults() {
-      return new PositionControllerBuilder(
+    public static ControlledMotorBuilder defaults() {
+      return new ControlledMotorBuilder(
         false, 
         true, 
         1.0, 
@@ -117,8 +117,8 @@ public record PositionControllerConfig (
      * @param config config to be copied
      * @return a builder with values copied from the input config
      */
-    public static PositionControllerBuilder edit(PositionControllerConfig config) {
-      return new PositionControllerBuilder(
+    public static ControlledMotorBuilder edit(ControlledMotorConfig config) {
+      return new ControlledMotorBuilder(
         config.neutralBrake(), 
         config.ccwPositive(), 
         config.motorToMechRatio(), 
@@ -138,87 +138,87 @@ public record PositionControllerConfig (
         config.velTolerance());
     }
 
-    public PositionControllerBuilder neutralBrake(boolean neutralBrake) {
+    public ControlledMotorBuilder neutralBrake(boolean neutralBrake) {
       this.neutralBrake = neutralBrake;
       return this;
     }
 
-    public PositionControllerBuilder ccwPositive(boolean ccwPositive) {
+    public ControlledMotorBuilder ccwPositive(boolean ccwPositive) {
       this.ccwPositive = ccwPositive;
       return this;
     }
 
-    public PositionControllerBuilder motorToMechRatio(double motorToMechRatio) {
+    public ControlledMotorBuilder motorToMechRatio(double motorToMechRatio) {
       this.motorToMechRatio = motorToMechRatio;
       return this;
     }
 
-    public PositionControllerBuilder statorCurrentLimit(double statorCurrentLimit) {
+    public ControlledMotorBuilder statorCurrentLimit(double statorCurrentLimit) {
       this.statorCurrentLimit = statorCurrentLimit;
       return this;
     }
 
-    public PositionControllerBuilder supplyCurrentLimit(double supplyCurrentLimit) {
+    public ControlledMotorBuilder supplyCurrentLimit(double supplyCurrentLimit) {
       this.supplyCurrentLimit = supplyCurrentLimit;
       return this;
     }
 
-    public PositionControllerBuilder maxVelocity(double maxVelocity) {
+    public ControlledMotorBuilder maxVelocity(double maxVelocity) {
       this.maxVelocity = maxVelocity;
       return this;
     }
 
-    public PositionControllerBuilder maxAcceleration(double maxAcceleration) {
+    public ControlledMotorBuilder maxAcceleration(double maxAcceleration) {
       this.maxAcceleration = maxAcceleration;
       return this;
     }
 
-    public PositionControllerBuilder kP(double kP) {
+    public ControlledMotorBuilder kP(double kP) {
       this.kP = kP;
       return this;
     }
 
-    public PositionControllerBuilder kI(double kI) {
+    public ControlledMotorBuilder kI(double kI) {
       this.kI = kI;
       return this;
     }
 
-    public PositionControllerBuilder kD(double kD) {
+    public ControlledMotorBuilder kD(double kD) {
       this.kD = kD;
       return this;
     }
 
-    public PositionControllerBuilder kS(double kS) {
+    public ControlledMotorBuilder kS(double kS) {
       this.kS = kS;
       return this;
     }
 
-    public PositionControllerBuilder kG(double kG) {
+    public ControlledMotorBuilder kG(double kG) {
       this.kG = kG;
       return this;
     }
 
-    public PositionControllerBuilder kV(double kV) {
+    public ControlledMotorBuilder kV(double kV) {
       this.kV = kV;
       return this;
     }
 
-    public PositionControllerBuilder kA(double kA) {
+    public ControlledMotorBuilder kA(double kA) {
       this.kA = kA;
       return this;
     }
 
-    public PositionControllerBuilder continuous(boolean continuous) {
+    public ControlledMotorBuilder continuous(boolean continuous) {
       this.continuous = continuous;
       return this;
     }
 
-    public PositionControllerBuilder posTolerance(double posTolerance) {
+    public ControlledMotorBuilder posTolerance(double posTolerance) {
       this.posTolerance = posTolerance;
       return this;
     }
 
-    public PositionControllerBuilder velTolerance(double velTolerance) {
+    public ControlledMotorBuilder velTolerance(double velTolerance) {
       this.velTolerance = velTolerance;
       return this;
     }
@@ -228,8 +228,8 @@ public record PositionControllerConfig (
      * 
      * @return the builder as a config with private immutable values
      */
-    public PositionControllerConfig build() {
-      return new PositionControllerConfig(
+    public ControlledMotorConfig build() {
+      return new ControlledMotorConfig(
         this.neutralBrake,
         this.ccwPositive,
         this.motorToMechRatio,
