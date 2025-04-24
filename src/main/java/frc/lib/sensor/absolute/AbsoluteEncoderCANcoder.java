@@ -1,5 +1,6 @@
 package frc.lib.sensor.absolute;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -20,7 +21,7 @@ public class AbsoluteEncoderCANcoder extends AbsoluteEncoder {
   private final CANcoder encoder;
 
   /** Set of tracked status signals */
-  private Set<StatusSignal<?>> signals;
+  private Set<StatusSignal<?>> signals = new HashSet<StatusSignal<?>>();;
   
   /** Initializes and configures hardware */
   public AbsoluteEncoderCANcoder(

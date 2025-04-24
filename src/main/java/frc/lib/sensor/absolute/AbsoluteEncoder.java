@@ -40,6 +40,44 @@ public abstract class AbsoluteEncoder {
     return config;
   }
 
+  /** Configure the absoulte encoder */
+  public abstract void configure();
+  
+  // Overridable suppliers for getting readings from the encoder
+
+  /**
+   * Returns angle supplier for absolute encoder
+   * @return angle supplier for absolute encoder
+   */
+  public Supplier<Double> getPosRotations() {
+    throw new UnsupportedOperationException("Position supplier not defined");
+  }
+
+  /**
+   * Returns velocity supplier for absolute encoder
+   * @return velocity supplier for absolute encoder
+   */
+  public Supplier<Double> getVelRotationsPerSec() {
+    throw new UnsupportedOperationException("Velocity supplier not defined");
+  }
+
+  /**
+   * Returns acceleration supplier for absolute encoder
+   * @return acceleration supplier for absolute encoder
+   */
+  public Supplier<Double> getAccRotationsPerSecPerSec() {
+    throw new UnsupportedOperationException("Acceleration supplier not defined");
+  }
+
+  /** Overridable periodic function for extra functionality run every periodic loop */
+  public void periodic() {}
+
+
+
+
+  
+  // Setters 
+
   /**
    * Set ccw positive configuration and reconfigure
    * 
@@ -75,36 +113,4 @@ public abstract class AbsoluteEncoder {
         .offset(offset)
         .build());
   }
-
-  /** Configure the absoulte encoder */
-  public abstract void configure();
-  
-  // Overridable suppliers for getting readings from the encoder
-
-  /**
-   * Returns angle supplier for absolute encoder
-   * @return angle supplier for absolute encoder
-   */
-  public Supplier<Double> getPosRotations() {
-    throw new UnsupportedOperationException("Position supplier not defined");
-  }
-
-  /**
-   * Returns velocity supplier for absolute encoder
-   * @return velocity supplier for absolute encoder
-   */
-  public Supplier<Double> getVelRotationsPerSec() {
-    throw new UnsupportedOperationException("Velocity supplier not defined");
-  }
-
-  /**
-   * Returns acceleration supplier for absolute encoder
-   * @return acceleration supplier for absolute encoder
-   */
-  public Supplier<Double> getAccRotationsPerSecPerSec() {
-    throw new UnsupportedOperationException("Acceleration supplier not defined");
-  }
-
-  /** Overridable periodic function for extra functionality run every periodic loop */
-  public void periodic() {}
 }
