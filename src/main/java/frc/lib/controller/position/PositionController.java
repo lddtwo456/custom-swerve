@@ -2,6 +2,7 @@ package frc.lib.controller.position;
 
 import frc.lib.controller.ControlledMotor;
 
+/** General interface for position controllers */
 public abstract class PositionController extends ControlledMotor {
 
   // Position controller inputs
